@@ -1,41 +1,78 @@
-﻿ 
+﻿using ISE102_A2_Part1.cs;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 public class Bank
-    
+
 {
-    private Dictionary<string, string> users = new Dictionary<string, string>();
+    private List<User> users = new List<User>();
     public Bank()
     {
-         users["Joe.Doe"] = "Password123";
+        User jd = new User();
+        jd.userName = "john.doe";
+        jd.password = "tesT12##";
+        jd.phone = "1234567890";
+        jd.email = "johnDoe@gmail.com";
+        users.Add(jd);
     }
 
-    public void SignUp()
+    public void Register()
     {
-        Console.WriteLine("Sign Up");
-        string username;
-        while (true)
+        Console.WriteLine("Register");
+
+        User newUser = new User();
+
+        Console.Write("Enter username: ");
+        string username = Console.ReadLine();
+
+        foreach (User usr in users)
         {
-            Console.Write("Enter username: ");
-            username = Console.ReadLine();
-            if (!users.ContainsKey(username))
+            if (username == usr.userName)
             {
-                break;
+                Console.WriteLine(" Username already exists, please try again");
+                Register();
             }
-            Console.WriteLine(" Username already exists, please try again");
-        }
-        while (true)
-        {
+            newUser.userName = username;
+
+            Console.Write("Enter email: ");
+            string email = Console.ReadLine();
+            if (email != null && email != "")
+            {
+                newUser.email = email;
+            }
+            else
+            {
+                Console.WriteLine(" Email must not be null");
+                Register();
+            }
+
+            Console.Write("Enter phone: ");
+            string phone = Console.ReadLine();
+            if (phone != null && phone != "")
+            {
+                newUser.phone = phone;
+            }
+            else
+            {
+                Console.WriteLine(" Phone must not be null");
+                Register();
+            }
+
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
-            if (!(password == null))
+            if (password != null && password != "")
             {
-                users.Add(username, password);
-                break;
+                newUser.password = password;
             }
-            Console.WriteLine("Password cannot be null");
+            else
+            {
+                Console.WriteLine(" Password must not be null");
+                Register();
+            }
+
+            users.Add(newUser);
+            Console.WriteLine($"New user added: {newUser.userName} - {newUser.email}");
         }
-        return; 
     }
     public bool Login()
     {
@@ -50,18 +87,21 @@ public class Bank
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
 
-            if (users.ContainsKey(username) && users[username] == password)
+            foreach (User usr in users)
             {
-                Console.WriteLine("Login successful! Welcome, " + username);
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Invalid credentials. please Try again.");
-                attempts++;
+                if (usr.userName == username)
+                {
+                    if (usr.password == password)
+                    {
+                        Console.WriteLine("Login successful! Welcome, " + username);
+                        return true;
+                    }
+                    
+                    Console.WriteLine("Invalid credentials. please Try again.");
+                    attempts++;
+                }
             }
         }
-
         Console.WriteLine("Too many failed attempts. Access denied.");
         return false;
     }
@@ -75,7 +115,7 @@ public class program
         while (true)
         {
             Console.WriteLine("Welcome to abc bank");
-            Console.Write(" 1: Login\n 2: Signup\n 3: Quit\n Please Select an option:  ");
+            Console.Write(" 1: Login\n 2: Register\n 3: Quit\n Please Select an option:  ");
             string option = Console.ReadLine();
             switch (option)
             {
@@ -93,7 +133,7 @@ public class program
                         break;
 
                 case "2":
-                    bank.SignUp();
+                    bank.Register();
                     break;
 
                 case "3":
