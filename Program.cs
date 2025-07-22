@@ -36,44 +36,44 @@ public class Bank
 
         newUser.userName = username;
 
-            Console.Write("Enter email: ");
-            string email = Console.ReadLine();
-            if (email != null && email != "")
-            {
-                newUser.email = email;
-            }
-            else
-            {
-                Console.WriteLine(" Email must not be null");
-                Register();
-            }
+        Console.Write("Enter email: ");
+        string email = Console.ReadLine();
+        if (email != null && email != "")
+        {
+            newUser.email = email;
+        }
+        else
+        {
+            Console.WriteLine(" Email must not be null");
+            Register();
+        }
 
-            Console.Write("Enter phone: ");
-            string phone = Console.ReadLine();
-            if (phone != null && phone != "")
-            {
-                newUser.phone = phone;
-            }
-            else
-            {
-                Console.WriteLine(" Phone must not be null");
-                Register();
-            }
+        Console.Write("Enter phone: ");
+        string phone = Console.ReadLine();
+        if (phone != null && phone != "")
+        {
+            newUser.phone = phone;
+        }
+        else
+        {
+            Console.WriteLine(" Phone must not be null");
+            Register();
+        }
 
-            Console.Write("Enter password: ");
-            string password = Console.ReadLine();
-            if (password != null && password != "")
-            {
-                newUser.password = password;
-            }
-            else
-            {
-                Console.WriteLine(" Password must not be null");
-                Register();
-            }
+        Console.Write("Enter password: ");
+        string password = Console.ReadLine();
+        if (password != null && password != "")
+        {
+            newUser.password = password;
+        }
+        else
+        {
+            Console.WriteLine(" Password must not be null");
+            Register();
+        }
 
-            users.Add(newUser);
-            Console.WriteLine($"New user added: {newUser.userName} - {newUser.email}");
+        users.Add(newUser);
+        Console.WriteLine($"New user added: {newUser.userName} - {newUser.email}");
     }
     public bool Login()
     {
@@ -97,7 +97,7 @@ public class Bank
                         Console.WriteLine("Login successful! Welcome, " + username);
                         return true;
                     }
-                    
+
                     Console.WriteLine("Invalid credentials. please Try again.");
                     attempts++;
                 }
@@ -129,9 +129,9 @@ public class program
                     }
                     else
                     {
-                        return; 
+                        return;
                     }
-                        break;
+                    break;
 
                 case "2":
                     bank.Register();
@@ -141,13 +141,13 @@ public class program
                     Console.WriteLine("Goodbye!");
                     Environment.Exit(0); // Terminates the program 
                     break;
-                    
+
 
                 default:
-                    Console.WriteLine("Invalid option."); 
+                    Console.WriteLine("Invalid option.");
                     break;
 
             }
         }
     }
-}  
+}
