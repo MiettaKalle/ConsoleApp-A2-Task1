@@ -32,7 +32,9 @@ public class Bank
                 Console.WriteLine(" Username already exists, please try again");
                 Register();
             }
-            newUser.userName = username;
+        }
+
+        newUser.userName = username;
 
             Console.Write("Enter email: ");
             string email = Console.ReadLine();
@@ -72,7 +74,6 @@ public class Bank
 
             users.Add(newUser);
             Console.WriteLine($"New user added: {newUser.userName} - {newUser.email}");
-        }
     }
     public bool Login()
     {
